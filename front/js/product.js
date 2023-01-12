@@ -1,18 +1,19 @@
-// Datas Url from API
-const url = 'http://localhost:3000/api/products';
+// get information product by id
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
 // All product from API
 
-fetch(url)
-    .then(response => {
-        if(response.ok){
-            response.json().then(datas => {
-                console.log(datas);
-                showProducts(datas);
-            })
-        }
-        else {
-            console.log("Une erreur s'est produite");
-        }
-    }
-)
+const url = `http://localhost:3000/api/products/${id}`;
+
+fetch(url).then((response) => {
+   if (response.ok) {
+      response.json().then((datas) => {
+         console.log(datas);
+         showItemProduct(datas);
+      });
+   } else {
+      console.log("Erreur de chargement");
+   }
+});
