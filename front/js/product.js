@@ -17,3 +17,21 @@ fetch(url).then((response) => {
       console.log("Erreur de chargement");
    }
 });
+
+// datas on page
+
+function showItemProduct(datas) {
+   document.querySelector(
+      ".item__img"
+   ).innerHTML = `<img src="${datas.imageUrl}" alt="${datas.altTxt}">`;
+   document.querySelector("title").innerText = `${datas.name}`;
+   document.querySelector("#title").innerText = `${datas.name}`;
+   document.querySelector("#price").innerText = `${datas.price}`;
+   document.querySelector("#description").innerText = `${datas.description}`;
+   for (let i of datas.colors) {
+      let option = document.createElement("option");
+      option.value = i;
+      option.innerHTML = i;
+      document.querySelector("#colors").appendChild(option);
+   }
+}
