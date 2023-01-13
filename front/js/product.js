@@ -1,7 +1,9 @@
 // get information product by id
 
 const params = new URLSearchParams(window.location.search);
+console.log(params);
 const id = params.get("id");
+console.log("id");
 
 // All product from API
 
@@ -34,4 +36,11 @@ function showItemProduct(datas) {
       option.innerHTML = i;
       document.querySelector("#colors").appendChild(option);
    }
+   addItemProductTocart(selectProduct);
+}
+
+// add items to cart
+
+function addItemProductTocart(selectProduct) {
+   
 }
