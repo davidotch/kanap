@@ -78,7 +78,7 @@ addItemToCart = (datas) => {
 
          // WANT TO ACCESS THE BASKET ?
          accessToCart = () => {
-            if (confirm("Commande enregistrée, accéder au panier ?") == true) {
+            if (confirm("Article ajouté, accéder au panier ?") == true) {
                window.location.href = "../html/cart.html";
             }
          };
