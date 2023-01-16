@@ -41,7 +41,7 @@ function itemProduct(datas) {
    }
 }
 
-const itemQty = document.querySelector("#quantity");
+const itemQuantity = document.querySelector("#quantity");
 
 const itemColor = document.querySelector("#colors");
 
@@ -52,13 +52,13 @@ function addItemToCart(datas) {
    addToCart_btn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      if (itemQty.value <= 0 || itemQty.value > 100 || itemColor.value == "") {
+      if (itemQuantity.value <= 0 || itemQuantity.value > 100 || itemColor.value == "") {
          alert("Veuillez saisir une quantité correcte et la couleur");
       } else {
-         let qty = itemQty.value;
+         let qty = itemQuantity.value;
          let colour = itemColor.value;
 
-         let selectedItem = {
+         let selectProduct = {
             id: id,
             img: datas.imageUrl,
             alt: datas.altTxt,
@@ -68,18 +68,20 @@ function addItemToCart(datas) {
             color: colour,
          };
 
-         let basket = JSON.parse(localStorage.getItem("localBasket"));
+         let basket = JSON.parse(localStorage.getItem("localProduct"));
          //json.parse=analyse une chaine de caractere json et construit l'objet décrit.
 
          // ADD SELECTED PRODUCT TO BASKET
-
          addToBasket = () =>
-            localStorage.setItem("localBasket", JSON.stringify(basket));
+            localStorage.setItem("localProduct", JSON.stringify(basket));
          //json.stringinfy=convertit une valeurjs en chaine json.
 
          // WANT TO ACCESS THE BASKET ?
          accessToCart = () => {
-            if (confirm("Article ajouté, accéder au panier ?") == true) {
+            if (
+               confirm("Votre article a été ajouté, accéder au panier ?") ==
+               true
+            ) {
                window.location.href = "../html/cart.html";
             }
          };
@@ -99,14 +101,14 @@ function addItemToCart(datas) {
                addToBasket();
                accessToCart();
             } else {
-               basket.push(selectedItem);
+               basket.push(selectProduct);
 
                addToBasket();
                accessToCart();
             }
          } else {
             basket = [];
-            basket.push(selectedItem);
+            basket.push(selectProduct);
 
             addToBasket();
             accessToCart();
