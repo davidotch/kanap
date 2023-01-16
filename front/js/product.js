@@ -42,9 +42,7 @@ function itemProduct(datas) {
 }
 
 const itemQuantity = document.querySelector("#quantity");
-
 const itemColor = document.querySelector("#colors");
-
 const addToCart_btn = document.querySelector("#addToCart");
 
 // CREATE CUSTOMER'S BASKET
@@ -52,7 +50,11 @@ function addItemToCart(datas) {
    addToCart_btn.addEventListener("click", (e) => {
       e.preventDefault();
 
-      if (itemQuantity.value <= 0 || itemQuantity.value > 100 || itemColor.value == "") {
+      if (
+         itemQuantity.value <= 0 ||
+         itemQuantity.value > 100 ||
+         itemColor.value == ""
+      ) {
          alert("Veuillez saisir une quantité correcte et la couleur");
       } else {
          let qty = itemQuantity.value;
