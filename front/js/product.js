@@ -6,7 +6,7 @@ const id = params.get("id");
 const url = `http://localhost:3000/api/products/${id}`;
 
 // NOW GET ITS DATAS BY FETCH REQUEST
-getProductDatas = () => {
+function getProductDatas() {
    fetch(url)
       .then(function (res) {
          if (res.ok) {
@@ -21,11 +21,11 @@ getProductDatas = () => {
       .catch(function (error) {
          console.log("Erreur lors du chargement : " + error);
       });
-};
+}
 getProductDatas();
 
 // DISPLAY PRODUCT'S DATAS ON THE PAGE, INJECT TO HTML
-itemProduct = (datas) => {
+function itemProduct(datas) {
    document.querySelector(
       ".item__img"
    ).innerHTML = `<img src="${datas.imageUrl}" alt="${datas.altTxt}" />`;
@@ -39,7 +39,7 @@ itemProduct = (datas) => {
       option.innerHTML = i;
       document.querySelector("#colors").appendChild(option);
    }
-};
+}
 
 const itemQty = document.querySelector("#quantity");
 
@@ -48,7 +48,7 @@ const itemColor = document.querySelector("#colors");
 const addToCart_btn = document.querySelector("#addToCart");
 
 // CREATE CUSTOMER'S BASKET
-addItemToCart = (datas) => {
+function addItemToCart(datas) {
    addToCart_btn.addEventListener("click", (e) => {
       e.preventDefault();
 
@@ -72,6 +72,7 @@ addItemToCart = (datas) => {
          //json.parse=analyse une chaine de caractere json et construit l'objet décrit.
 
          // ADD SELECTED PRODUCT TO BASKET
+
          addToBasket = () =>
             localStorage.setItem("localBasket", JSON.stringify(basket));
          //json.stringinfy=convertit une valeurjs en chaine json.
@@ -112,4 +113,4 @@ addItemToCart = (datas) => {
          }
       }
    });
-};
+}
