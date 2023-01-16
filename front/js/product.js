@@ -5,6 +5,13 @@ console.log(params);
 const id = params.get("id");
 console.log("id");
 
+const itemImg = document.querySelector(".item__img");
+const titleProduit = document.getElementById("title");
+const priceProduit = document.getElementById("price");
+const descriptionProduit = document.getElementById("description");
+const couleurProduit = document.getElementById("colors");
+const nombreProduitSelectionne = document.getElementById("quantity");
+
 // All product from API
 
 const url = `http://localhost:3000/api/products/${id}`;
@@ -41,6 +48,4 @@ function showItemProduct(datas) {
 
 // add items to cart
 
-function addItemProductTocart(selectProduct) {
-   
-}
+function addItemProductTocart(selectProduct) {}
