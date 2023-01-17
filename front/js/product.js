@@ -96,7 +96,8 @@ function addItemToCart(datas) {
 
             if (sameItem) {
                let addQuantity =
-                  parseInt(selectedItem.quantity) + parseInt(sameItem.quantity);
+                  parseInt(selectProduct.quantity) +
+                  parseInt(sameItem.quantity);
                //parseInt=analyse et renvoie un entier dans une base de données
                sameItem.quantity = addQuantity;
 
