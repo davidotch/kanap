@@ -117,4 +117,28 @@ changeQty = () => {
    }
 };
 
+// REMOVE ITEM FROM BASKET
+removeItem = () => {
+   const removeBtn = document.querySelectorAll(".deleteItem");
 
+   for (let i = 0; i < removeBtn.length; i++) {
+      removeBtn[i].addEventListener("click", (e) => {
+         e.preventDefault();
+
+         if (
+            confirm("Voulez-vous supprimer cet article du panier ? ") == true
+         ) {
+            let itemToRemoveId = basket[i].id;
+            let itemToRemoveColor = basket[i].color;
+
+            newBasket = basket.filter(
+               (e) => e.id !== itemToRemoveId || e.color !== itemToRemoveColor
+            );
+
+            localStorage.setItem("localProduct", JSON.stringify(newBasket));
+
+            window.location.reload();
+         }
+      });
+   }
+};
