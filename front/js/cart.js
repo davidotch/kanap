@@ -57,3 +57,27 @@ getBasket = async () => {
 
 getBasket();
 
+// GET BASKET PRODUCT(S) TOTAL QUANTITY AND TOTAL PRICE
+
+getTotalQty = async () => {
+   const qty = document.querySelectorAll(".itemQuantity");
+   let totalQty = 0;
+   for (let i = 0; i < qty.length; i++) {
+      let value = qty[i].value;
+      totalQty += parseInt(value);
+   }
+   document.querySelector("#totalQuantity").innerText = totalQty;
+
+   let totalPrice = 0;
+
+   for (let i = 0; i < basket.length; i++) {
+      let item = basket[i];
+
+      productData = await getProductDatas(item.id);
+
+      totalPrice += qty[i].value * productData.price;
+   }
+   document.querySelector("#totalPrice").innerHTML = totalPrice;
+};
+
+
