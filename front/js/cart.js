@@ -80,4 +80,41 @@ getTotalQty = async () => {
    document.querySelector("#totalPrice").innerHTML = totalPrice;
 };
 
+// MODIFY A PRODUCT QUANTITY, AND REMOVE FROM BASKET AND DISPLAY WHEN EQUAL TO ZERO
+
+changeQty = () => {
+   const inputQty = document.querySelectorAll(".itemQuantity");
+
+   for (let i = 0; i < inputQty.length; i++) {
+      inputQty[i].addEventListener("change", (e) => {
+         e.preventDefault();
+
+         let modifiedValue = inputQty[i].value;
+
+         if (modifiedValue > 0 && modifiedValue <= 100) {
+            basket[i].quantity = modifiedValue;
+
+            localStorage.setItem("localProduct", JSON.stringify(basket));
+         } else if (modifiedValue > 100 || modifiedValue < 0) {
+            alert("La quantité saisie est incorrecte");
+         } else {
+            if (
+               confirm("Voulez-vous supprimer cet article du panier ?") == true
+            ) {
+               let itemToRemoveId = basket[i].id;
+               let itemToRemoveColor = basket[i].color;
+
+               newBasket = basket.filter(
+                  (e) =>
+                     e.id !== itemToRemoveId || e.color !== itemToRemoveColor
+               );
+
+               localStorage.setItem("localProduct", JSON.stringify(newBasket));
+            }
+         }
+         getTotalQty();
+      });
+   }
+};
+
 
