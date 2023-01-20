@@ -98,7 +98,8 @@ function addItemToCart(datas) {
                let addQuantity =
                   parseInt(selectProduct.quantity) +
                   parseInt(sameItem.quantity);
-               //parseInt=analyse et renvoie un entier dans une base de données
+               //parseInt=convertit une chaine de caractere en nombre entier
+               //parseFloat=convertit une chaine de caractere en nombre avec la virgule
                sameItem.quantity = addQuantity;
 
                addToBasket();
