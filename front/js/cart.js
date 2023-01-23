@@ -53,7 +53,7 @@ function getBasket() {
                             </div>`;
       }
       getTotalQuantity();
-      changeQty();
+      changeQuantity();
       removeItem();
    }
 }
