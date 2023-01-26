@@ -16,7 +16,9 @@ function getProductDatas(idProduct) {
 
 // ----Basket datas----
 
-function getBasket() {
+// ----la fonction async 'getBasket' contient l'expression await et interrompt l'exécution de la fonction asynchrone et attend la résolution de la promesse passée. La fonction async reprend ensuite puis renvoie la valeur 'productData'.
+
+async function getBasket() {
    if (basket === null || basket == 0) {
       let h1 = document.querySelector("h1");
       h1.innerText = "Votre panier est vide";
@@ -24,7 +26,7 @@ function getBasket() {
       for (let i = 0; i < basket.length; i++) {
          let item = basket[i];
 
-         productData = getProductDatas(item.id);
+         productData = await getProductDatas(item.id);
          console.log(productData);
 
          let article = document.createElement("article");
@@ -60,13 +62,15 @@ function getBasket() {
 
 getBasket();
 
-// ----Get basket product total qty and total price----
+// ----Get basket product total quantity and total price----
 
-function getTotalQuantity() {
-   const qty = document.querySelectorAll(".itemQuantity");
+// ----la fonction async 'getTotalQuantity' contient l'expression await et interrompt l'exécution de la fonction asynchrone et attend la résolution de la promesse passée. La fonction async reprend ensuite puis renvoie la valeur 'productData'.
+
+async function getTotalQuantity() {
+   const quantity = document.querySelectorAll(".itemQuantity");
    let totalQty = 0;
-   for (let i = 0; i < qty.length; i++) {
-      let value = qty[i].value;
+   for (let i = 0; i < quantity.length; i++) {
+      let value = quantity[i].value;
       totalQty += parseInt(value);
    }
    document.querySelector("#totalQuantity").innerText = totalQty;
@@ -76,9 +80,73 @@ function getTotalQuantity() {
    for (let i = 0; i < basket.length; i++) {
       let item = basket[i];
 
-      productData = getProductDatas(item.id);
+      productData = await getProductDatas(item.id);
 
-      totalPrice += qty[i].value * productData.price;
+      totalPrice += quantity[i].value * productData.price;
    }
    document.querySelector("#totalPrice").innerHTML = totalPrice;
+}
+
+// -----Modify product quantity and remove from basket----
+
+function changeQuantity() {
+   const inputQty = document.querySelectorAll(".itemQuantity");
+
+   for (let i = 0; i < inputQty.length; i++) {
+      inputQty[i].addEventListener("change", (e) => {
+         e.preventDefault();
+
+         let modifiedValue = inputQty[i].value;
+
+         if (modifiedValue > 0 && modifiedValue <= 100) {
+            basket[i].quantity = modifiedValue;
+
+            localStorage.setItem("localProduct", JSON.stringify(basket));
+         } else if (modifiedValue > 100 || modifiedValue < 0) {
+            alert("La quantité saisie est incorrecte");
+         } else {
+            if (
+               confirm("Voulez-vous supprimer cet article du panier ?") == true
+            ) {
+               let itemToRemoveId = basket[i].id;
+               let itemToRemoveColor = basket[i].color;
+
+               newBasket = basket.filter(
+                  (e) =>
+                     e.id !== itemToRemoveId || e.color !== itemToRemoveColor
+               );
+
+               localStorage.setItem("localProduct", JSON.stringify(newBasket));
+            }
+         }
+         getTotalQuantity();
+      });
+   }
+}
+
+// ----Remove item from basket----
+
+function removeItem() {
+   const removeBtn = document.querySelectorAll(".deleteItem");
+
+   for (let i = 0; i < removeBtn.length; i++) {
+      removeBtn[i].addEventListener("click", (e) => {
+         e.preventDefault();
+
+         if (
+            confirm("Voulez-vous supprimer cet article du panier ? ") == true
+         ) {
+            let itemToRemoveId = basket[i].id;
+            let itemToRemoveColor = basket[i].color;
+
+            newBasket = basket.filter(
+               (e) => e.id !== itemToRemoveId || e.color !== itemToRemoveColor
+            );
+
+            localStorage.setItem("localProduct", JSON.stringify(newBasket));
+
+            window.location.reload();
+         }
+      });
+   }
 }
