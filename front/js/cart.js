@@ -56,7 +56,7 @@ async function getBasket() {
       }
       getTotalQuantity();
       changeQuantity();
-      removeItem();
+      deleteProduct();
    }
 }
 
@@ -127,11 +127,11 @@ function changeQuantity() {
 
 // ----Remove item from basket----
 
-function removeItem() {
-   const removeBtn = document.querySelectorAll(".deleteItem");
+function deleteProduct() {
+   const deleteButton = document.querySelectorAll(".deleteItem");
 
-   for (let i = 0; i < removeBtn.length; i++) {
-      removeBtn[i].addEventListener("click", (e) => {
+   for (let i = 0; i < deleteButton.length; i++) {
+      deleteButton[i].addEventListener("click", (e) => {
          e.preventDefault();
 
          if (
