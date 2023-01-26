@@ -94,7 +94,7 @@ function changeQuantity() {
    const inputQuantity = document.querySelectorAll(".itemQuantity");
 
    for (let i = 0; i < inputQuantity.length; i++) {
-      inputQty[i].addEventListener("change", (e) => {
+      inputQuantity[i].addEventListener("change", (e) => {
          e.preventDefault();
 
          let modifiedValue = inputQuantity[i].value;
