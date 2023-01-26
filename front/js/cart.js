@@ -27,7 +27,7 @@ async function getBasket() {
          let item = basket[i];
 
          productPrice = await getProductDatas(item.id);
-         console.log(productPrice);
+         console.log(productPrice); //----on initialise 'productPrice' avec comme valeur la fonction fectch.
 
          let article = document.createElement("article");
          article.className = "cart__item";
@@ -81,6 +81,7 @@ async function getTotalQuantity() {
       let item = basket[i];
 
       productPrice = await getProductDatas(item.id);
+      console.log(productPrice); //----on initialise 'productPrice' avec comme valeur la fonction fectch.
 
       totalPrice += quantity[i].value * productPrice.price;
    }
@@ -90,13 +91,13 @@ async function getTotalQuantity() {
 // -----Modify product quantity and remove from basket----
 
 function changeQuantity() {
-   const inputQty = document.querySelectorAll(".itemQuantity");
+   const inputQuantity = document.querySelectorAll(".itemQuantity");
 
-   for (let i = 0; i < inputQty.length; i++) {
+   for (let i = 0; i < inputQuantity.length; i++) {
       inputQty[i].addEventListener("change", (e) => {
          e.preventDefault();
 
-         let modifiedValue = inputQty[i].value;
+         let modifiedValue = inputQuantity[i].value;
 
          if (modifiedValue > 0 && modifiedValue <= 100) {
             basket[i].quantity = modifiedValue;
