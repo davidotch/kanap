@@ -26,8 +26,8 @@ async function getBasket() {
       for (let i = 0; i < basket.length; i++) {
          let item = basket[i];
 
-         productData = await getProductDatas(item.id);
-         console.log(productData);
+         productPrice = await getProductDatas(item.id);
+         console.log(productPrice);
 
          let article = document.createElement("article");
          article.className = "cart__item";
@@ -41,7 +41,7 @@ async function getBasket() {
                              <div class="cart__item__content__description">
                                <h2>${item.name}</h2>
                                 <p>${item.color}</p>
-                                <p>${productData.price} €</p>
+                                <p>${productPrice.price} €</p>
                              </div>
                             <div class="cart__item__content__settings">
                                <div class="cart__item__content__settings__quantity">
@@ -80,9 +80,9 @@ async function getTotalQuantity() {
    for (let i = 0; i < basket.length; i++) {
       let item = basket[i];
 
-      productData = await getProductDatas(item.id);
+      productPrice = await getProductDatas(item.id);
 
-      totalPrice += quantity[i].value * productData.price;
+      totalPrice += quantity[i].value * productPrice.price;
    }
    document.querySelector("#totalPrice").innerHTML = totalPrice;
 }
