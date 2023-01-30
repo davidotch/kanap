@@ -163,14 +163,37 @@ const email = document.querySelector("#email");
 const firstNameError = firstName.nextElementSibling;
 const lastNameError = lastName.nextElementSibling;
 const addressError = address.nextElementSibling;
+const cityError = city.nextElementSibling;
 const emailError = email.nextElementSibling;
 
 const nameCityRegExp = /^[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$/;
 const addressRegExp = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*$/;
-const emailRegExp =
-   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegExp = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
+   
 
 function formControl() {
-   
+   function testRegExp(name, regExp, error) {
+      if (name.value.match(regExp)) {
+         error.innerHTML = "";
+      } else {
+         error.innerHTML = "La saisie est incorrecte";
+         return false;
+      }
+   }
+   firstName.addEventListener("change", function () {
+      testRegExp(firstName, nameCityRegExp, firstNameError);
+   });
+   lastName.addEventListener("change", function () {
+      testRegExp(lastName, nameCityRegExp, lastNameError);
+   });
+   address.addEventListener("change", function () {
+      testRegExp(address, addressRegExp, addressError);
+   });
+   city.addEventListener("change", function () {
+      testRegExp(city, nameCityRegExp, cityError);
+   });
+   email.addEventListener("change", function () {
+      testRegExp(email, emailRegExp, emailError);
+   });
 }
-
+formControl();
