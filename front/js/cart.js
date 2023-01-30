@@ -154,85 +154,23 @@ function deleteProduct() {
 
 // ----form----
 
+const firstName = document.querySelector("#firstName");
+const lastName = document.querySelector("#lastName");
+const address = document.querySelector("#address");
+const city = document.querySelector("#city");
+const email = document.querySelector("#email");
+
+const firstNameError = firstName.nextElementSibling;
+const lastNameError = lastName.nextElementSibling;
+const addressError = address.nextElementSibling;
+const emailError = email.nextElementSibling;
+
+const nameCityRegExp = /^[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$/;
+const addressRegExp = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*$/;
+const emailRegExp =
+   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 function formControl() {
-   const orderForm = document.querySelectorAll(".cart__order__form");
-
-   let nameCityRegExp = new regExp("^[a-zA-Z ,.'-]+$");
-   let emailRegExp = new regExp(
-      "^[a-zA-Z0-9 -_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
-   );
-   let addressRegExp = new regExp(
-      "^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+"
-   );
-
-   // --ecoute de la modification firdtNAme--
-   orderForm.firstName.addEventListener("change", function () {
-      validFirstName(this);
-   });
-   //--ecoute de la modification lastName--
-   orderForm.lastName.addEventListener("change", function () {
-      validLastName(this);
-   });
-   //--ecoute de la modification address--
-   orderForm.address.addEventListener("change", function () {
-      validAddress(this);
-   });
-   //--ecoute de la modification city--
-   orderForm.city.addEventListener("change", function () {
-      validCity(this);
-   });
-   //--ecoute de la modification email--
-   orderForm.email.addEventListener("change", function () {
-      validEmail(this);
-   });
-
-   //--create firstName regexp and errormsg--
-   const validFirstName = function (inputFirstName) {
-      let firstNameErrorMsg = inputFirstName.nextElementSibling;
-
-      if (nameCityRegExp.test(inputFirstName.value)) {
-         firstNameErrorMsg.innerHTML = "";
-      } else {
-         firstNameErrorMsg.innerHTML = "Saisie incorrecte";
-         return false;
-      }
-   };
-
-   //--create lastName regexp and errormsg--
-   const validLastName = function (inputLastName) {
-      let lastNameRegExp = new RegExp("^[a-zA-Z ,.'-]@+$", "g"); //--regExp + marqueur--
-
-      let testLastName = lastNameRegExp.test(inputLastName.value);
-      // console.log(testLastName);
-
-      let lastNameErrorMsg = inputLastName.nextElementSibling;
-
-      if (validLastName) {
-         lastNameErrorMsg.innerHTML = "";
-      } else {
-         lastNameErrorMsg.innerHTML = "Saisie incorrecte";
-      }
-   };
-
-   //--create address regexp and errormsg--
-   const validAddress = function (inputAddress) {
-      let addressErrorMsg = inputAddress.nextElementSibling;
-
-      if (addressRegExp.test(inputAddress.value)) {
-         addressErrorMsg.innerHTML = "";
-      } else {
-         addressErrorMsg.innerHTML = "Saisie incorrecte";
-      }
-   };
+   
 }
-formControl();
 
-//create address a
-
-// let emailRegExp = RegExp(
-//    "^[a-zA-Z0-9 -_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
-// );
-// let addressRegExp = RegExp(
-//    "^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+"
-// );
-// let cityNameRegExp = RegExp("^[a-zA-Z ,.'-]+$");
