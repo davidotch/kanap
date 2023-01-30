@@ -151,3 +151,95 @@ function deleteProduct() {
       });
    }
 }
+
+// ----form----
+
+const orderForm = document.querySelector(".cart__order__form");
+// console.log(orderForm.firstName);
+// console.log(orderForm.lastName);
+// console.log(orderForm.address);
+// console.log(orderForm.city);
+// console.log(orderForm.email);
+
+// --ecoute de la modification firdtNAme--
+orderForm.firstName.addEventListener("change", function () {
+   validFirstName(this);
+});
+
+//--ecoute de la modification lastName--
+orderForm.lastName.addEventListener("change", function () {
+   validLastName(this);
+});
+
+//--ecoute de la modification address--
+orderForm.address.addEventListener("change", function () {
+   validAddress(this);
+});
+
+//--ecoute de la modification city--
+orderForm.city.addEventListener("change", function () {
+   validCity(this);
+});
+
+//--ecoute de la modification email--
+orderForm.email.addEventListener("change", function () {
+   validEmail(this);
+});
+
+//--create firstName regexp and errormsg--
+const validFirstName = function (inputFirstName) {
+   let firstNameRegExp = new RegExp("^[a-zA-Z ,.'-]+$", "g"); //--regExp + marqueur--
+
+   let testFirstName = firstNameRegExp.test(inputFirstName.value);
+   // console.log(testFirstName);
+
+   let firstNameErrorMsg = inputFirstName.nextElementSibling;
+
+   if (validFirstName) {
+      firstNameErrorMsg.innerHTML = "";
+   } else {
+      firstNameErrorMsg.innerHTML = "Saisie incorrecte";
+   }
+};
+
+//--create lastName regexp and errormsg--
+const validLastName = function (inputLastName) {
+   let lastNameRegExp = new RegExp("^[a-zA-Z ,.'-]@+$", "g"); //--regExp + marqueur--
+
+   let testLastName = lastNameRegExp.test(inputLastName.value);
+   // console.log(testLastName);
+
+   let lastNameErrorMsg = inputLastName.nextElementSibling;
+
+   if (validLastName) {
+      lastNameErrorMsg.innerHTML = "";
+   } else {
+      lastNameErrorMsg.innerHTML = "Saisie incorrecte";
+   }
+};
+
+//--create address regexp and errormsg--
+const validAddress = function (inputAddress) {
+   let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+", "g");//--regExp = marqueur--
+
+   let testAddress = addressRegExp.test(inputAddress.value);
+   console.log(testAddress);
+
+   let addressErrorMsg = inputAddress.nextElementSibling;
+
+   if (validAddress) {
+      addressErrorMsg.innerHTML = "";
+   } else {
+      addressErrorMsg.innerHTML = "Saisie incorrecte";
+   }
+};
+
+//create address a
+
+// let emailRegExp = RegExp(
+//    "^[a-zA-Z0-9 -_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
+// );
+// let addressRegExp = RegExp(
+//    "^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+"
+// );
+// let cityNameRegExp = RegExp("^[a-zA-Z ,.'-]+$");
