@@ -166,7 +166,7 @@ const addressError = address.nextElementSibling;
 const cityError = city.nextElementSibling;
 const emailError = email.nextElementSibling;
 
-const nameCityRegExp = /^[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$/;
+const nameCityRegExp = /^[a-zA-Z0-9àâäéèêëïîôöùûüç ,.'-]+$/;
 const addressRegExp = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*$/;
 const emailRegExp = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 
@@ -223,7 +223,7 @@ btnOrder.addEventListener("click", (e) => {
       cityError.innerHTML !== "" ||
       emailError.innerHTML !== ""
    ) {
-      alert("Veuillez vérifier votre formulaire");
+      alert("La saisie de votre formulaire est incorrecte");
    } else if (basket === null || basket == 0) {
       alert("votre panier est vide, veuillez choisir un article");
       window.location.href = "index.html";
