@@ -152,7 +152,7 @@ function deleteProduct() {
    }
 }
 
-// ----form----
+// ----Formulaire----
 
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
@@ -169,9 +169,9 @@ const emailError = email.nextElementSibling;
 const nameCityRegExp = /^[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$/;
 const addressRegExp = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*$/;
 const emailRegExp = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
-   
 
 function formControl() {
+   //--fonction testREgExp et msg erreur--
    function testRegExp(name, regExp, error) {
       if (name.value.match(regExp)) {
          error.innerHTML = "";
@@ -180,6 +180,8 @@ function formControl() {
          return false;
       }
    }
+
+   //--Ecoute evenements des differents champs--
    firstName.addEventListener("change", function () {
       testRegExp(firstName, nameCityRegExp, firstNameError);
    });
