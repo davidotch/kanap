@@ -199,3 +199,74 @@ function formControl() {
    });
 }
 formControl();
+
+//----Commande----
+
+const postUrl = "http://localhost:3000/api/products/order";
+const btnOrder = document.querySelector("#order");
+
+btnOrder.addEventListener("click", (e) => {
+   e.preventDefault();
+
+   if (
+      firstName.value == "" ||
+      lastName.value == "" ||
+      address.value == "" ||
+      city.value == "" ||
+      email.value == ""
+   ) {
+      alert("Veuillez remplir les champs du formulaire");
+   } else if (
+      firstNameError.innerHTML !== "" ||
+      lastNameError.innerHTML !== "" ||
+      addressError.innerHTML !== "" ||
+      cityError.innerHTML !== "" ||
+      emailError.innerHTML !== ""
+   ) {
+      alert("Veuillez vérifier votre formulaire");
+   } else if (basket === null || basket == 0) {
+      alert("votre panier est vide, veuillez choisir un article");
+      window.location.href = "index.html";
+   } else if (confirm("Confirmez-vous votre commande ? ") == true) {
+      let basketItems = [];
+
+      for (let i = 0; i < basket.length; i++) {
+         basketItems.push(basket[i].id);
+      }
+
+      let order = {
+         contact: {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            address: address.value,
+            city: city.value,
+            email: email.value,
+         },
+         products: basketItems,
+      };
+
+      const options = {
+         method: "post",
+         body: JSON.stringify(order),
+         headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+         },
+      };
+
+      fetch(postUrl, options)
+         .then((res) => res.json())
+         .then((datas) => {
+            console.log(datas);
+
+            localStorage.clear();
+
+            window.location.href = "confirmation.html?orderId=" + datas.orderId;
+         })
+         .catch((error) => {
+            alert(error);
+         });
+   } else {
+      return false;
+   }
+});
