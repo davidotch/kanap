@@ -1,10 +1,8 @@
-// ----Get datas from local stotage----
-
+//----Obtenir des données à partir du LocalStorage----
 let basket = JSON.parse(localStorage.getItem("localProduct"));
 console.log(basket);
 
-// ----Get product datas from API/ID to get price----
-
+//----Obtenir les données du produit à partir de l'API/ID pour obtenir le prix----
 function getProductDatas(idProduct) {
    response = fetch("http://localhost:3000/api/products/" + idProduct).then(
       (data) => {
@@ -14,21 +12,23 @@ function getProductDatas(idProduct) {
    return response;
 }
 
-// ----Basket datas----
+//----Données du panier----
 
-// ----la fonction async 'getBasket' contient l'expression await et interrompt l'exécution de la fonction asynchrone et attend la résolution de la promesse passée. La fonction async reprend ensuite puis renvoie la valeur 'productData'.
-
+// ----la fonction async 'getBasket' contient l'expression await et interrompt l'exécution de la fonction asynchrone et attend la résolution de la promesse passée. La fonction async reprend ensuite puis renvoie la valeur 'getproductData'.
 async function getBasket() {
    if (basket === null || basket == 0) {
       let h1 = document.querySelector("h1");
       h1.innerText = "Votre panier est vide";
    } else {
+      //--length indique le nombre d'element dans le tableau pour ce sera 'basket' dans le localStorage--
       for (let i = 0; i < basket.length; i++) {
          let item = basket[i];
 
+         //----on initialise 'productPrice' avec comme valeur la fonction fectch.
          productPrice = await getProductDatas(item.id);
-         console.log(productPrice); //----on initialise 'productPrice' avec comme valeur la fonction fectch.
+         console.log(productPrice);
 
+         //----Création de l'élément "article" pour afficher les articles dans le panier----
          let article = document.createElement("article");
          article.className = "cart__item";
          article.setAttribute("data-id", item.id);
@@ -62,13 +62,14 @@ async function getBasket() {
 
 getBasket();
 
-// ----Get basket product total quantity and total price----
+// ----Obtenir la quantité totale et le prix total du produit dans le panier----
 
-// ----la fonction async 'getTotalQuantity' contient l'expression await et interrompt l'exécution de la fonction asynchrone et attend la résolution de la promesse passée. La fonction async reprend ensuite puis renvoie la valeur 'productData'.
+// --la fonction async 'getTotalQuantity' contient l'expression await et interrompt l'exécution de la fonction asynchrone et attend la résolution de la promesse passée. La fonction async reprend ensuite puis renvoie la valeur 'getproductData'--
 
 async function getTotalQuantity() {
    const quantity = document.querySelectorAll(".itemQuantity");
    let totalQty = 0;
+   //--for ([initialisation]; [condition]; [expression-finale])--
    for (let i = 0; i < quantity.length; i++) {
       let value = quantity[i].value;
       totalQty += parseInt(value);
@@ -80,16 +81,16 @@ async function getTotalQuantity() {
    for (let i = 0; i < basket.length; i++) {
       let item = basket[i];
 
+      //--on initialise 'productPrice' avec comme valeur la fonction fectch--
       productPrice = await getProductDatas(item.id);
-      console.log(productPrice); //----on initialise 'productPrice' avec comme valeur la fonction fectch.
+      console.log(productPrice);
 
       totalPrice += quantity[i].value * productPrice.price;
    }
    document.querySelector("#totalPrice").innerHTML = totalPrice;
 }
 
-// -----Modify product quantity and remove from basket----
-
+// -----Modifier la quantité du produit et le retirer du panier----
 function changeQuantity() {
    const inputQuantity = document.querySelectorAll(".itemQuantity");
 
@@ -125,7 +126,7 @@ function changeQuantity() {
    }
 }
 
-// ----Remove item from basket----
+// ----Supprimer l'article du panier----
 
 function deleteProduct() {
    const deleteButton = document.querySelectorAll(".deleteItem");
@@ -173,6 +174,7 @@ const emailRegExp = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 function formControl() {
    //--fonction testREgExp et msg erreur--
    function testRegExp(name, regExp, error) {
+      //--match() permet d'obtenir le tableau des correspondances entre la chaîne courante et une expression rationnelle--
       if (name.value.match(regExp)) {
          error.innerHTML = "";
       } else {
@@ -181,7 +183,7 @@ function formControl() {
       }
    }
 
-   //--Ecoute evenements des differents champs--
+   //----Ecoute evenements des differents champs----
    firstName.addEventListener("change", function () {
       testRegExp(firstName, nameCityRegExp, firstNameError);
    });
@@ -200,7 +202,7 @@ function formControl() {
 }
 formControl();
 
-//----Commande----
+//----Passer la commande----
 
 const postUrl = "http://localhost:3000/api/products/order";
 const btnOrder = document.querySelector("#order");
@@ -230,6 +232,7 @@ btnOrder.addEventListener("click", (e) => {
    } else if (confirm("Confirmez-vous votre commande ? ") == true) {
       let basketItems = [];
 
+      //--for ([initialisation]; [condition]; [expression-finale])--
       for (let i = 0; i < basket.length; i++) {
          basketItems.push(basket[i].id);
       }
