@@ -1,11 +1,11 @@
-// GET ID OF THE PAGE'S PRODUCT
+//----Obtenir ID du produit de la page ----
 const params = new URLSearchParams(window.location.search);
 
 const id = params.get("id");
 
 const url = `http://localhost:3000/api/products/${id}`;
 
-// NOW GET ITS DATAS BY FETCH REQUEST
+//----Obtenir les données par une requête Fetch----
 function getProductDatas() {
    fetch(url)
       .then(function (res) {
@@ -24,7 +24,7 @@ function getProductDatas() {
 }
 getProductDatas();
 
-// DISPLAY PRODUCT'S DATAS ON THE PAGE, INJECT TO HTML
+//----Afficher les données du produit sur la page + injection Html----
 function itemProduct(datas) {
    document.querySelector(
       ".item__img"
@@ -41,11 +41,11 @@ function itemProduct(datas) {
    }
 }
 
+//----Création du panier----
 const itemQuantity = document.querySelector("#quantity");
 const itemColor = document.querySelector("#colors");
 const addToCart_btn = document.querySelector("#addToCart");
 
-// CREATE CUSTOMER'S BASKET
 function addItemToCart(datas) {
    addToCart_btn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -73,12 +73,12 @@ function addItemToCart(datas) {
          let basket = JSON.parse(localStorage.getItem("localProduct"));
          //json.parse=analyse une chaine de caractere json et construit l'objet décrit.
 
-         // ADD SELECTED PRODUCT TO BASKET
+         //----Ajouter le produit sélectionner au panier----
          addToBasket = () =>
             localStorage.setItem("localProduct", JSON.stringify(basket));
          //json.stringinfy=convertit une valeurjs en chaine json.
 
-         // WANT TO ACCESS THE BASKET ?
+         //----Accéder au panier----
          accessToCart = () => {
             if (
                confirm("Votre article a été ajouté, accéder au panier ?") ==
@@ -88,7 +88,7 @@ function addItemToCart(datas) {
             }
          };
 
-         // CREATE OR MODIFY BASKET
+         //----Créer ou modifier le panier----
          if (basket) {
             let sameItem = basket.find(
                (element) => element.id === id && element.color === colour
