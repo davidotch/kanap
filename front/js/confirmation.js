@@ -1,5 +1,4 @@
 //----Afficher L'ID de la commande----
-
 function idOrder() {
    const params = new URLSearchParams(window.location.search);
 
@@ -7,6 +6,5 @@ function idOrder() {
 
    let displayId = document.querySelector("#orderId");
    displayId.innerText = orderiId;
-};
-
+}
 idOrder();
