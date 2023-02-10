@@ -251,10 +251,15 @@ btnOrder.addEventListener("click", (e) => {
       };
 
       const options = {
+         // --la méthode post permet d'envoyer des données.
          method: "post",
+         // -- convertit une valeur js en chaine JSON.
          body: JSON.stringify(order),
+         // -- headers de l'API fetch permet d'effectuer des actions sur les entetes de requetes.
          headers: {
+            // -- content-type permet d'indiquer la nature et le format d'un document.
             "Content-Type": "application/json",
+            // --accept indique quels sont les types de contenu.
             accept: "application/json",
          },
       };
