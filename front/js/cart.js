@@ -1,4 +1,5 @@
 //----Obtenir des données à partir du LocalStorage----
+// --on récpère les données dans le localStorage.
 let basket = JSON.parse(localStorage.getItem("localProduct"));
 console.log(basket);
 
@@ -20,11 +21,11 @@ async function getBasket() {
       let h1 = document.querySelector("h1");
       h1.innerText = "Votre panier est vide";
    } else {
-      //--length indique le nombre d'element dans le tableau pour ce sera 'basket' dans le localStorage--
+      //--length indique le nombre d'element dans le tableau pour nous ce sera 'basket' dans le localStorage--
       for (let i = 0; i < basket.length; i++) {
          let item = basket[i];
 
-         //----on initialise 'productPrice' avec comme valeur la fonction fectch.
+         //----on initialise 'productPrice' avec comme valeur fectch.
          productPrice = await getProductDatas(item.id);
          console.log(productPrice);
 
@@ -114,6 +115,7 @@ function changeQuantity() {
                let itemToRemoveColor = basket[i].color;
 
                newBasket = basket.filter(
+                  // --filter permet de créer et de retourner un nouveau tableau remplissant une condition déterminé
                   (e) =>
                      e.id !== itemToRemoveId || e.color !== itemToRemoveColor
                );
