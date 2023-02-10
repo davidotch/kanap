@@ -1,6 +1,9 @@
 //----Obtenir ID du produit de la page ----
+// --URLSerachParams permet de travailler les paramètre d'une Url.
+// --window.location nous permet de renvoyer un objet qui contient des informations sur l'url courante du document.
 const params = new URLSearchParams(window.location.search);
 
+// --get nous permet de renvoyer la valeur de params et de rechercher son id.
 const id = params.get("id");
 
 const url = `http://localhost:3000/api/products/${id}`;
@@ -91,6 +94,7 @@ function addItemToCart(datas) {
          //----Créer ou modifier le panier----
          if (basket) {
             let sameItem = basket.find(
+               // --find renvoie la valeur du 1er element trouvé dans notre array.
                (element) => element.id === id && element.color === colour
             );
 
@@ -105,6 +109,7 @@ function addItemToCart(datas) {
                addToBasket();
                accessToCart();
             } else {
+               // --push ajoute l'element a la fin de notre array et retourne la nouvelle valeur.
                basket.push(selectProduct);
 
                addToBasket();
