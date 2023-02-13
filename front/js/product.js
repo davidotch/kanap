@@ -36,6 +36,7 @@ function itemProduct(datas) {
    document.querySelector("#title").innerText = `${datas.name}`;
    document.querySelector("#price").innerText = `${datas.price}`;
    document.querySelector("#description").innerText = `${datas.description}`;
+   // --for...of permet de creer une boucle au sein de notre array pour récupérer les couleurs.
    for (let i of datas.colors) {
       let option = document.createElement("option");
       option.value = i;
