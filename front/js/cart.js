@@ -169,7 +169,7 @@ const addressError = address.nextElementSibling;
 const cityError = city.nextElementSibling;
 const emailError = email.nextElementSibling;
 
-const nameCityRegExp = /^[a-zA-Z0-9àâäéèêëïîôöùûüç ,.'-]+$/;
+const nameCityRegExp = /^[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$/;
 const addressRegExp = /^[0-9]{1,3}[a-zA-Zàâäéèêëïîôöùûüç ,.'-]+$/;
 const emailRegExp = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
 
